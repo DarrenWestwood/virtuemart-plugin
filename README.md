@@ -1,6 +1,6 @@
 # virtuemart-plugin
 
-# Wordpress Bitcoin Payments - Blockonomics #
+# Joomla Bitcoin Payments - Blockonomics #
 **Tags:** bitcoin, accept bitcoin, bitcoin virtuemart, bitcoin joomla plugin, bitcoin payments
 
 Accept bitcoin payments and altcoins on your Joomla website, Bitcoin payments go directly to your wallet.
