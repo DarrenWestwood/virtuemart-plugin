@@ -14,11 +14,11 @@ You must have a Blockonomics merchant account to use this plugin. It's free to s
 
 ### Download ###
 
-Download the zip file from the most recent release on the release page of this repository.
+Download the most recent release zip file from the release page of this repository.
 
 ### Install the Blockonomics VirtueMart plugin ###
 
-Go to Extensions -> Extension Manager -> Install
+Go to Extensions -> Extension Manager -> Install.
 Browse and select the zip file, click Upload & Install.
 Go to Manage, and find the plugin under "VM Payment - Blockonomics", and make sure that the plugin is enabled.
 
