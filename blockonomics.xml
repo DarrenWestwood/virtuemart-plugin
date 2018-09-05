@@ -57,7 +57,7 @@ THE SOFTWARE.
         <fields name="params">
             <fieldset name="basic">
                     <field name="merchant_apikey" type="text" label="VMPAYMENT_BLOCKONOMICS_API_KEY_LABEL" description="VMPAYMENT_BLOCKONOMICS_API_KEY_LABEL" size="100%" />
-                    <field name="merchant_secret" type="hidden" readonly="true" label="VMPAYMENT_BLOCKONOMICS_SECRET_LABEL" description="VMPAYMENT_BLOCKONOMICS_SECRET_LABEL" />
+                    <field name="merchant_secret" type="text" readonly="true" label="VMPAYMENT_BLOCKONOMICS_SECRET_LABEL" description="VMPAYMENT_BLOCKONOMICS_SECRET_LABEL" />
                     <field name="merchant_callback" type="url" readonly="true" label="VMPAYMENT_BLOCKONOMICS_CALLBACK_LABEL" description="VMPAYMENT_BLOCKONOMICS_CALLBACK_LABEL" size="100%"/>
                     <field name="alt_payments" type="checkbox" label="VMPAYMENT_BLOCKONOMICS_ALT_PAYMENTS_LABEL" description="VMPAYMENT_BLOCKONOMICS_ALT_PAYMENTS_LABEL" />
                     <field name="timer" type="list" default="live" label="VMPAYMENT_BLOCKONOMICS_TIMER_LABEL"
