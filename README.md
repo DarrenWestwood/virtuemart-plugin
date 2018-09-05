@@ -5,6 +5,7 @@ Using the Blockonomics plugin for VirtueMart
 You must have a Blockonomics merchant account to use this plugin. It's free to sign-up.
 
 1. Download
+
 Download the zip file from the most recent release on the release page of this repository.
 
 2. Install the Blockonomics VirtueMart plugin
