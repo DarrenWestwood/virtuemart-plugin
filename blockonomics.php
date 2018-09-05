@@ -873,6 +873,7 @@ class plgVmPaymentBlockonomics extends vmPSPlugin
         $timer    =  $method->timer;
         $blockonomics_callback_secret = $method->merchant_secret;
         $blockonomics = new Blockonomics;
+	echo "<br>"; //Fix HTTP/1.1 500 Internal Server Error
         $responseObj = $blockonomics->new_address($api_key, $blockonomics_callback_secret); // Development use: ($api_key, $blockonomics_callback_secret, true)
         $price = $blockonomics->get_price($paymentCurrency->_vendorCurrency_code_3);
         $satoshi = intval(1.0e8*$totalInPaymentCurrency/$price);
