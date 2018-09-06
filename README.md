@@ -27,21 +27,17 @@ Go to Manage, and find the plugin under "VM Payment - Blockonomics", and make su
 Create a Merchant API Key in your Blockonomics Merchant account at [Blockonomics](https://www.blockonomics.co/merchants?utm_source=joomla).
 Copy The API Key shown on the merchants page.
 
-### Plugin settings - Payment method ###
+### Payment method settings###
 
 Go to Components -> VirtueMart and click on Payment Methods.
 Click New and type in the payment method information, selecting "VM Payment - Blockonomics" as the Payment Method. Be sure to select "Yes" in the publish section. 
 Click save.
 
-### Plugin settings - Blockonomics ###
+### Blockonomics settings ###
 
-Select the configuration tab and paste your Merchant API Key.
-Copy your Callback URL and click on Save & Close. 
+Select the configuration tab and paste your Merchant API Key and click on Save.
 
-### Blockonomics merchant callback ###
-
-Visit your Blockonomics Merchant account.
-Paste your Callback URL in HTTP Callback URL field and click Save Changes.
+**Make sure to click on the Test Setup button to finalize your setup with Blockonomics**
 
 
 You’re officially ready to accept Bitcoins on your Joomla site.

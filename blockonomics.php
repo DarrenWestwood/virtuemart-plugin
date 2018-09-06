@@ -112,50 +112,6 @@ class Blockonomics
         return $responseObj;
     }
 
-    public function test_setup($callback_url)
-    {
-    	$options = array( 'http' => array( 'method'  => 'GET') );
-        $context = stream_context_create($options);
-		$contents = file_get_contents(Blockonomics::GET_CALLBACK_URL, false, $context); 
-		$response = json_decode($contents);
-		$error_str = '';
-		
-		//TODO: Check This: WE should actually check code for timeout
-		if (!isset($response->response_code)) {
-			$error_str = 'Your server is blocking outgoing HTTPS calls';
-		}
-		elseif ($response->response_code==401)
-			$error_str = 'API Key is incorrect';
-		elseif ($response->response_code!=200)  
-			$error_str = $response->data;
-		elseif (!isset($response->data) || count($response->data) == 0)
-		{
-			$error_str = 'You have not entered an xpub';
-		}
-		elseif (count($response->data) == 1)
-		{
-		if(!$response->data[0]->callback || $response->data[0]->callback == null)
-		{
-		  //No callback URL set, set one 
-			 $error_str = "No callback URL set";
-		}
-		elseif($response->data[0]->callback != $callback_url)
-		{
-		  // Check if only secret differs
-		    $error_str = "Your have an existing callback URL. Refer instructions on integrating multiple websites";
-		}
-		}
-		else 
-		{
-		// Check if callback url is set
-		foreach ($response->data as $resObj)
-			if($resObj->callback == $callback_url)
-		    	return "";
-			$error_str = "Your have an existing callback URL. Refer instructions on integrating multiple websites";
-		}
-		return $error_str;
-    }
-
 
 }
 
@@ -166,16 +122,44 @@ class JFormFieldCity extends JFormField {
 	protected $type = 'City';
 
 	// getLabel() left out
-
 	public function getInput() {
-		return '<button class="btn btn-success" type="button" id="'.$this->id.'" name="'.$this->name.'">' . 'Test Setup'. '</button>
-		'.'
-			<script>
-			jQuery( "#params_title" ).click(function() {
-			  alert( "Handler for click called." );
-			});
-			</script>
-		';//Fix loading of jQuery for admin
+        $db = JFactory::getDBO();
+        $query = 'SELECT `payment_params` FROM ' . '#__virtuemart_paymentmethods' . " WHERE  `payment_element`= '" . "blockonomics" ."'";
+        $db->setQuery($query);
+        $result = $db->loadResult();
+        $array = explode('|', $result);
+        $ex_api = explode("=",$array[0]);
+        $ex_api = $ex_api[1];
+        $ex_api = str_replace('"', "", $ex_api);
+        $ex_secret = explode("=",$array[1]);
+        $ex_secret = $ex_secret[1];
+        $ex_secret = str_replace('"', "", $ex_secret);
+        $ex_url = explode("callback=",$array[2]);
+        $ex_url = $ex_url[1];
+        $ex_url = str_replace('"', "", $ex_url);
+        $post_url = JROUTE::_(JURI::root() . 'plugins/vmpayment/blockonomics/test-setup.php');
+        if($ex_api != ""){
+    		return '<button class="btn btn-success" type="button" id="'.$this->id.'" name="'.$this->name.'">' . 'Test Setup'. '</button><div id="blocko_test_return" style="display:none"></div>
+    		'.'
+    			<script>
+                jQuery("#params_title").click(function() {
+                    jQuery("#blocko_test_return").html( "Testing connection..." );
+                    jQuery("#blocko_test_return").show();
+                    jQuery.ajax({
+                        type: "POST",
+                        url: "'. $post_url . '",
+                        data: {secret:"'. $ex_secret . '", api:"'. $ex_api . '", url:"'. $ex_url . '"},
+                        success: function(data) {
+                            console.log(data);
+                            jQuery("#blocko_test_return").html( data );
+                        }
+                    });
+                });
+    			</script>
+    		';//Fix loading of jQuery for admin
+        }else {
+            return '<button class="btn btn-success" type="button" id="'.$this->id.'" name="'.$this->name.'" disabled>' . 'Test Setup'. '</button>';
+        }
 	}
 }
 
@@ -873,7 +857,6 @@ class plgVmPaymentBlockonomics extends vmPSPlugin
         $timer    =  $method->timer;
         $blockonomics_callback_secret = $method->merchant_secret;
         $blockonomics = new Blockonomics;
-	echo "<br>"; //Fix HTTP/1.1 500 Internal Server Error
         $responseObj = $blockonomics->new_address($api_key, $blockonomics_callback_secret); // Development use: ($api_key, $blockonomics_callback_secret, true)
         $price = $blockonomics->get_price($paymentCurrency->_vendorCurrency_code_3);
         $satoshi = intval(1.0e8*$totalInPaymentCurrency/$price);
@@ -894,8 +877,7 @@ class plgVmPaymentBlockonomics extends vmPSPlugin
                 'alt_payments'		 => $alt_payments,
                 'timer'				 => $timer,
                 'txid'               => '',
-                'returnurl' 		 => JROUTE::_(JURI::root() . 'index.php?option=com_virtuemart&view=pluginresponse&task=pluginresponsereceived&secret=' . $blockonomics_callback_secret),
-                'complete_url'         => JROUTE::_(JURI::root() . 'index.php?option=com_virtuemart&view=pluginresponse&task=pluginnotification&tmpl=component')
+                'returnurl' 		 => JROUTE::_(JURI::root() . 'index.php?option=com_virtuemart&view=pluginresponse&task=pluginresponsereceived&secret=' . $blockonomics_callback_secret)
             );
 
             $html = $this->renderByLayout('post_payment', $post_variables);

@@ -33,6 +33,7 @@ THE SOFTWARE.
     <description>Blockonomics payment plugin</description>
     <files>
         <filename plugin="blockonomics">blockonomics.php</filename>
+        <filename plugin="blockonomics">test-setup.php</filename>
         <folder>language</folder>
         <folder>blockonomics</folder>
         <folder>js</folder>
@@ -42,7 +43,7 @@ THE SOFTWARE.
         <param name="merchant_apikey" type="text"  label="VMPAYMENT_BLOCKONOMICS_API_KEY_LABEL" description="VMPAYMENT_BLOCKONOMICS_API_KEY_LABEL" />
         <param name="merchant_secret" type="text" readonly="true"  label="VMPAYMENT_BLOCKONOMICS_SECRET_LABEL" description="VMPAYMENT_BLOCKONOMICS_SECRET_LABEL" />
         <param name="merchant_callback" type="url" readonly="true"  label="VMPAYMENT_BLOCKONOMICS_CALLBACK_LABEL" description="VMPAYMENT_BLOCKONOMICS_CALLBACK_LABEL" />
-        <param name="alt_payments" type="checkbox" label="VMPAYMENT_BLOCKONOMICS_ALT_PAYMENTS_LABEL" description="VMPAYMENT_BLOCKONOMICS_ALT_PAYMENTS_LABEL" />
+        <!-- <param name="alt_payments" type="checkbox" label="VMPAYMENT_BLOCKONOMICS_ALT_PAYMENTS_LABEL" description="VMPAYMENT_BLOCKONOMICS_ALT_PAYMENTS_LABEL" /> -->
         <param name="timer" type="list" default="live" label="VMPAYMENT_BLOCKONOMICS_TIMER_LABEL"
            description="VMPAYMENT_BLOCKONOMICS_TIMER_LABEL">
             <option value="10">10</option>
@@ -51,7 +52,7 @@ THE SOFTWARE.
             <option value="25">25</option>
             <option value="30">30</option>
         </param>
-        <!-- <param name="title" type="City" label="VMPAYMENT_BLOCKONOMICS_SETUP_TEST_LABEL" description="VMPAYMENT_BLOCKONOMICS_SETUP_TEST_LABEL" /> -->
+        <param name="title" type="City" label="VMPAYMENT_BLOCKONOMICS_SETUP_TEST_LABEL" description="VMPAYMENT_BLOCKONOMICS_SETUP_TEST_LABEL" />
     </params>
     <config>
         <fields name="params">
@@ -59,7 +60,7 @@ THE SOFTWARE.
                     <field name="merchant_apikey" type="text" label="VMPAYMENT_BLOCKONOMICS_API_KEY_LABEL" description="VMPAYMENT_BLOCKONOMICS_API_KEY_LABEL" size="100%" />
                     <field name="merchant_secret" type="text" readonly="true" label="VMPAYMENT_BLOCKONOMICS_SECRET_LABEL" description="VMPAYMENT_BLOCKONOMICS_SECRET_LABEL" />
                     <field name="merchant_callback" type="url" readonly="true" label="VMPAYMENT_BLOCKONOMICS_CALLBACK_LABEL" description="VMPAYMENT_BLOCKONOMICS_CALLBACK_LABEL" size="100%"/>
-                    <field name="alt_payments" type="checkbox" label="VMPAYMENT_BLOCKONOMICS_ALT_PAYMENTS_LABEL" description="VMPAYMENT_BLOCKONOMICS_ALT_PAYMENTS_LABEL" />
+                    <!-- <field name="alt_payments" type="checkbox" label="VMPAYMENT_BLOCKONOMICS_ALT_PAYMENTS_LABEL" description="VMPAYMENT_BLOCKONOMICS_ALT_PAYMENTS_LABEL" /> -->
                     <field name="timer" type="list" default="live" label="VMPAYMENT_BLOCKONOMICS_TIMER_LABEL"
                        description="VMPAYMENT_BLOCKONOMICS_TIMER_LABEL">
                         <option value="10">10</option>
@@ -68,7 +69,7 @@ THE SOFTWARE.
                         <option value="25">25</option>
                         <option value="30">30</option>
                     </field>
-                   <!--<field name="title" type="City" label="VMPAYMENT_BLOCKONOMICS_SETUP_TEST_LABEL" description="VMPAYMENT_BLOCKONOMICS_SETUP_TEST_LABEL" /> -->
+                    <field name="title" type="City" label="VMPAYMENT_BLOCKONOMICS_SETUP_TEST_LABEL" description="VMPAYMENT_BLOCKONOMICS_SETUP_TEST_LABEL" />
             </fieldset>
         </fields>
     </config>

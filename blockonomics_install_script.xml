@@ -38,6 +38,7 @@ THE SOFTWARE.
 	<files>
 		<filename plugin="blockonomics">blockonomics.xml</filename>
 		<filename plugin="blockonomics">blockonomics.php</filename>
+		<filename plugin="blockonomics">test-setup.php</filename>
 		<filename plugin="blockonomics">bitcoin_default.png</filename>
 		<folder>language</folder>
 		<folder>blockonomics</folder>

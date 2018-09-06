@@ -118,12 +118,12 @@ defined ('_JEXEC') or die();
       </div>
     </div>
     <script>var blockonomics_time_period=<?php echo  intval($viewData['timer']) ?>;</script>
-    <script src="<?php echo '/joomla/plugins/vmpayment/blockonomics/js/angular.min.js';?>"></script>
-    <script src="<?php echo '/joomla/plugins/vmpayment/blockonomics/js/angular-resource.min.js';?>"></script>
-    <script src="<?php echo '/joomla/plugins/vmpayment/blockonomics/js/app.js';?>"></script>
-    <script src="<?php echo '/joomla/plugins/vmpayment/blockonomics/js/angular-qrcode.js';?>"></script>
-    <script src="<?php echo '/joomla/plugins/vmpayment/blockonomics/js/vendors.min.js';?>"></script>
-    <script src="<?php echo '/joomla/plugins/vmpayment/blockonomics/js/reconnecting-websocket.min.js';?>"></script>
+    <script src="<?php echo  JROUTE::_(JURI::root() . 'plugins/vmpayment/blockonomics/js/angular.min.js');?>"></script>
+    <script src="<?php echo   JROUTE::_(JURI::root() . 'plugins/vmpayment/blockonomics/js/angular-resource.min.js');?>"></script>
+    <script src="<?php echo   JROUTE::_(JURI::root() . 'plugins/vmpayment/blockonomics/js/app.js');?>"></script>
+    <script src="<?php echo   JROUTE::_(JURI::root() . 'plugins/vmpayment/blockonomics/js/angular-qrcode.js');?>"></script>
+    <script src="<?php echo   JROUTE::_(JURI::root() . 'plugins/vmpayment/blockonomics/js/vendors.min.js');?>"></script>
+    <script src="<?php echo   JROUTE::_(JURI::root() . 'plugins/vmpayment/blockonomics/js/reconnecting-websocket.min.js');?>"></script>
   </div>
 </div>
 
