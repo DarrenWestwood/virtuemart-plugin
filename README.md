@@ -37,7 +37,7 @@ Click save.
 
 Select the configuration tab, paste your Merchant API Key and click on Save.
 
-**Make sure to click on the Test Setup button to finalize your setup with Blockonomics**
+**Make sure to click on the Test Setup button to finalise your setup with Blockonomics**
 
 
 You’re officially ready to accept Bitcoins on your Joomla site.
