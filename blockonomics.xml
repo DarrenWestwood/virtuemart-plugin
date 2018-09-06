@@ -51,7 +51,7 @@ THE SOFTWARE.
             <option value="25">25</option>
             <option value="30">30</option>
         </param>
-        <param name="title" type="City" label="VMPAYMENT_BLOCKONOMICS_SETUP_TEST_LABEL" description="VMPAYMENT_BLOCKONOMICS_SETUP_TEST_LABEL" />
+        <!-- <param name="title" type="City" label="VMPAYMENT_BLOCKONOMICS_SETUP_TEST_LABEL" description="VMPAYMENT_BLOCKONOMICS_SETUP_TEST_LABEL" /> -->
     </params>
     <config>
         <fields name="params">
@@ -68,7 +68,7 @@ THE SOFTWARE.
                         <option value="25">25</option>
                         <option value="30">30</option>
                     </field>
-                    <field name="title" type="City" label="VMPAYMENT_BLOCKONOMICS_SETUP_TEST_LABEL" description="VMPAYMENT_BLOCKONOMICS_SETUP_TEST_LABEL" />
+                   <!--<field name="title" type="City" label="VMPAYMENT_BLOCKONOMICS_SETUP_TEST_LABEL" description="VMPAYMENT_BLOCKONOMICS_SETUP_TEST_LABEL" /> -->
             </fieldset>
         </fields>
     </config>
