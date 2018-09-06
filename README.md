@@ -27,7 +27,7 @@ Go to Manage, and find the plugin under "VM Payment - Blockonomics", and make su
 Create a Merchant API Key in your Blockonomics Merchant account at [Blockonomics](https://www.blockonomics.co/merchants?utm_source=joomla).
 Copy The API Key shown on the merchants page.
 
-### Payment method settings###
+### Payment method settings ###
 
 Go to Components -> VirtueMart and click on Payment Methods.
 Click New and type in the payment method information, selecting "VM Payment - Blockonomics" as the Payment Method. Be sure to select "Yes" in the publish section. 
@@ -35,7 +35,7 @@ Click save.
 
 ### Blockonomics settings ###
 
-Select the configuration tab and paste your Merchant API Key and click on Save.
+Select the configuration tab, paste your Merchant API Key and click on Save.
 
 **Make sure to click on the Test Setup button to finalize your setup with Blockonomics**
 
