@@ -58,7 +58,7 @@ defined ('_JEXEC') or die();
               <span ng-show="order.status >= 2" ng-cloak ><?php echo "Confirmed"; ?></span>
             </div>
 
-            <div class="bnomics-btc-info">
+            <div class="bnomics-btc-info" ng-show="order.status == -1" ng-cloak>
               <!-- QR and Amount -->
               <div class="bnomics-qr-code">
                 <h5 class="bnomics-qr-code-title" for="btn-address"><?php echo "Bitcoin Address"; ?></h5>
@@ -71,7 +71,7 @@ defined ('_JEXEC') or die();
               </div>
 
               <!-- BTC Amount -->
-              <div class="bnomics-amount">
+              <div class="bnomics-amount" ng-show="order.status == -1" ng-cloak>
                 <h4 class="bnomics-amount-title" for="invoice-amount"><?php echo "Amount";?></h4>
                 <div class="bnomics-amount-wrapper">
                   <span ng-show="{{order.satoshi}}" ng-cloak>{{order.satoshi/1.0e8}}</span>
@@ -83,7 +83,7 @@ defined ('_JEXEC') or die();
             </div>
 			
             <!-- Bitcoin Address -->
-            <div class="bnomics-address">
+            <div class="bnomics-address" ng-show="order.status == -1" ng-cloak>
               <input class="bnomics-address-input" type="text" ng-value="order.address" readonly="readonly">
             </div>
             <div class="bnomics-powered-by">
@@ -171,6 +171,7 @@ defined ('_JEXEC') or die();
 
 .bnomics-order-container {
   margin: auto;
+  background-color: #F7F7F7;
   padding: 30px;
 }
 
@@ -208,9 +209,9 @@ defined ('_JEXEC') or die();
 }
 
 .bnomics-order-info > div {
-  padding-left: 15px;
-  padding-right: 15px;
-  padding-top: 30px;
+  padding-left: 0px;
+  padding-right: 0px;
+  padding-top: 0px;
   padding-bottom: 0;
 }
 

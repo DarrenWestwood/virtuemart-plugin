@@ -7,7 +7,7 @@ Accept bitcoin payments and altcoins on your Joomla website, Bitcoin payments go
 
 ## Description ##
 
-The fastest and easiest way to start accepting Bitcoin payments on your VirtueMart online store. Since 2015, [Blockonomics](https://www.blockonomics.co/merchants?utm_source=joomla) has helped thousands of ecommerce sites increase sales by including Bitcoin, Ethereum, Litecoin, and other major altcoins as a payment option for their customers.
+The fastest and easiest way to start accepting Bitcoin payments on your VirtueMart online store. Since 2015, [Blockonomics](https://www.blockonomics.co/merchants?utm_source=joomla) has helped thousands of e-commerce sites increase sales by including Bitcoin, Ethereum, Litecoin, and other major altcoins as a payment option for their customers.
 
 ## Using the Blockonomics plugin for VirtueMart ##
 You must have a Blockonomics merchant account to use this plugin. It's free to sign-up.
@@ -25,7 +25,7 @@ Go to Manage, and find the plugin under "VM Payment - Blockonomics", and make su
 ### Setup merchant account ###
 
 Create a Merchant API Key in your Blockonomics Merchant account at [Blockonomics](https://www.blockonomics.co/merchants?utm_source=joomla).
-Copy The API Key shown on the merchants page.
+Copy The API Key shown on the merchants' page.
 
 ### Payment method settings###
 
@@ -35,7 +35,7 @@ Click save.
 
 ### Blockonomics settings ###
 
-Select the configuration tab and paste your Merchant API Key and click on Save.
+Select the configuration tab and paste your Merchant API Key.
 
 **Make sure to click on the Test Setup button to finalize your setup with Blockonomics**
 

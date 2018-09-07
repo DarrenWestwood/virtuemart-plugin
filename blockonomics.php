@@ -123,43 +123,100 @@ class JFormFieldCity extends JFormField {
 
 	// getLabel() left out
 	public function getInput() {
-        $db = JFactory::getDBO();
-        $query = 'SELECT `payment_params` FROM ' . '#__virtuemart_paymentmethods' . " WHERE  `payment_element`= '" . "blockonomics" ."'";
-        $db->setQuery($query);
-        $result = $db->loadResult();
-        $array = explode('|', $result);
-        $ex_api = explode("=",$array[0]);
-        $ex_api = $ex_api[1];
-        $ex_api = str_replace('"', "", $ex_api);
-        $ex_secret = explode("=",$array[1]);
-        $ex_secret = $ex_secret[1];
-        $ex_secret = str_replace('"', "", $ex_secret);
-        $ex_url = explode("callback=",$array[2]);
-        $ex_url = $ex_url[1];
-        $ex_url = str_replace('"', "", $ex_url);
+        // $db = JFactory::getDBO();
+        // $query = 'SELECT `payment_params` FROM ' . '#__virtuemart_paymentmethods' . " WHERE  `payment_element`= '" . "blockonomics" ."'";
+        // $db->setQuery($query);
+        // $result = $db->loadResult();
+        // $array = explode('|', $result);
+        // $ex_api = explode("=",$array[0]);
+        // $ex_api = $ex_api[1];
+        // $ex_api = str_replace('"', "", $ex_api);
+        // $ex_secret = explode("=",$array[1]);
+        // $ex_secret = $ex_secret[1];
+        // $ex_secret = str_replace('"', "", $ex_secret);
+        // $ex_url = explode("callback=",$array[2]);
+        // $ex_url = $ex_url[1];
+        // $ex_url = str_replace('"', "", $ex_url);
+        //Vmerror('Blockonomics Error - '); Working
+        $app = JFactory::getApplication();
+        $app->enqueueMessage('Blockonomics Message');
+        JError::raiseNotice( 100, 'Blockonomics Notice' );
+        JError::raiseWarning( 100, 'Blockonomics Warning' );
+        //JError::raiseError( 4711, 'Blockonomics Error' );
         $post_url = JROUTE::_(JURI::root() . 'plugins/vmpayment/blockonomics/test-setup.php');
-        if($ex_api != ""){
-    		return '<button class="btn btn-success" type="button" id="'.$this->id.'" name="'.$this->name.'">' . 'Test Setup'. '</button><div id="blocko_test_return" style="display:none"></div>
+        $base_url = JROUTE::_(JURI::root());
+    		return '<button class="btn btn-success" type="button" id="'.$this->id.'" name="'.$this->name.'">' . 'Test Setup'. '</button>
     		'.'
     			<script>
+                jQuery(".alert-error").hide();
+                jQuery(".alert-info").hide();
+                jQuery(".alert-message").each(function( ) {
+                    jQuery(this).hide();
+                    
+                    if(jQuery(this).html() == "Payment Method successfully saved"){
+                        jQuery(this).addClass("blockonomics-pm-saved");
+                        jQuery(this).html("Payment Method successfully saved. Visit the Configuration tab to enter your API key.");
+                        jQuery(this).show();
+                    }
+                    if(jQuery(this).html() == "Blockonomics Message"){
+                        jQuery(this).addClass("blockonomics-message");
+                    }
+                    if(jQuery(this).html() == "Blockonomics Notice"){
+                        jQuery(this).addClass("blockonomics-notice");;
+                    }
+                    if(jQuery(this).html() == "Blockonomics Warning"){
+                        jQuery(this).addClass("blockonomics-warning");
+                    }
+                    if(jQuery(this).html() == "Blockonomics Error"){
+                        jQuery(this).addClass("blockonomics-error");
+                    }
+                });
+
                 jQuery("#params_title").click(function() {
-                    jQuery("#blocko_test_return").html( "Testing connection..." );
+                    jQuery("#params_title").prop("disabled", true);
+                    jQuery(".alert-success").hide();
+                    jQuery(".alert-error").hide();
+                    jQuery(".blockonomics-pm-saved").hide();
+                    jQuery(".blockonomics-notice").html( "Connecting to Blockonomics" );
+                    jQuery(".blockonomics-notice").show();
+                    jQuery(".alert-info").show();
+                    var send_secret = jQuery("#params_merchant_secret").val();
+                    var send_api = jQuery("#params_merchant_apikey").val();
+                    var send_url = jQuery("#params_merchant_callback").val();
+                    if(jQuery("#params_alt_payments").val()){
+                        var alt_payments = jQuery("#params_alt_payments").val();
+                    }
+                    var timer = jQuery("#params_timer").val();
                     jQuery("#blocko_test_return").show();
                     jQuery.ajax({
                         type: "POST",
                         url: "'. $post_url . '",
-                        data: {secret:"'. $ex_secret . '", api:"'. $ex_api . '", url:"'. $ex_url . '"},
+                        data: {secret:send_secret, api:send_api, url:send_url, base_url:"'. $base_url . '", alt_payments:alt_payments, timer:timer},
                         success: function(data) {
                             console.log(data);
-                            jQuery("#blocko_test_return").html( data );
+                            if(data.match("^Congrats")){
+                                jQuery(".alert-info").hide();
+                                jQuery(".blockonomics-message").html(data);
+                                jQuery(".alert-success").show();
+                                jQuery(".alert-error").hide();
+                                jQuery(".blockonomics-message").show();
+                                jQuery(".blockonomics-warning").hide();
+                                jQuery("#params_title").prop("disabled", false);
+                            }
+                            else{
+                                jQuery(".alert-info").hide();
+                                jQuery(".blockonomics-warning").html(data);
+                                jQuery(".alert-success").hide();
+                                jQuery(".alert-error").show();
+                                jQuery(".blockonomics-warning").show();
+                                jQuery(".blockonomics-message").hide();
+                                jQuery("#params_title").prop("disabled", false);
+                            }
                         }
                     });
                 });
     			</script>
-    		';//Fix loading of jQuery for admin
-        }else {
-            return '<button class="btn btn-success" type="button" id="'.$this->id.'" name="'.$this->name.'" disabled>' . 'Test Setup'. '</button>';
-        }
+    		';
 	}
 }
 
@@ -620,11 +677,11 @@ class plgVmPaymentBlockonomics extends vmPSPlugin
                 if ($nb_history == 1) {
                     if ($status == 0 && time() > $timestamp + $time_period) {
                         $minutes = (time() - $timestamp)/60;
-                        //$wc_order->add_order_note(__("Warning: Payment arrived after $minutes minutes. Received BTC may not match current bitcoin price", 'blockonomics-bitcoin-payments'));
+                        //Warning: Payment arrived after $minutes minutes
                         $order['order_status'] = 'P';
                         $order['virtuemart_order_id'] = $virtuemart_order_id;
                         $order['customer_notified'] = 0;
-                        $order['comments'] = 'Warning: Payment arrived after '.$minutes.' minutes. Received BTC may not match current bitcoin price';
+                        $order['comments'] = 'Warning: Payment arrived after '.round($minutes, 2).' minutes. Received BTC may not match current bitcoin price';
                     }
                     elseif ($status == 2) {
                         if ($result['bits'] > $amount) {
@@ -635,21 +692,21 @@ class plgVmPaymentBlockonomics extends vmPSPlugin
                             $order['customer_notified'] = 0;
                             $order['comments'] = 'Paid BTC amount less than expected';
                         }
-                        else{
-                            if ($result['bits'] < $amount) {
+                        elseif($result['bits'] < $amount){
                                 //Overpayment of BTC amount
                                 $order['order_status'] = 'C';
                                 $order['virtuemart_order_id'] = $virtuemart_order_id;
                                 $order['customer_notified'] = 0;
                                 $order['comments'] = 'Overpayment of BTC amount';
-                            }
+                        }
+                        else {
                             //Payment completed
                             $order['order_status'] = 'C';
                             $order['virtuemart_order_id'] = $virtuemart_order_id;
                             $order['customer_notified'] = 0;
                             $order['comments'] = 'Payment completed';
-
                         }
+
                     }
                     $modelOrder->updateStatusForOneOrder($virtuemart_order_id, $order, true);
                 }
@@ -665,8 +722,8 @@ class plgVmPaymentBlockonomics extends vmPSPlugin
                 $db->query();
             }else {
             	echo "Secrets do not match" . "<br>";
-           		echo "Secret DB " . $callback_secret;
-           		echo "Secret Input " . $secret;
+           		// echo "Secret DB " . $callback_secret;
+           		// echo "Secret Input " . $secret;
                 return null;
             }
             $cart = VirtueMartCart::getCart();

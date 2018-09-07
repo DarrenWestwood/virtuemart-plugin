@@ -87,7 +87,7 @@ app.controller('CheckoutController', function($scope, $interval, Order, $httpPar
         }
         $scope.tick_interval  = $interval($scope.tick, 1000);
         //Websocket
-        var ws = new ReconnectingWebSocket("wss://www.blockonomics.co/payment/" + $scope.order.address)// + "?timestamp=" + $scope.timestamp); ***** Bring Back Timestamp *****
+        var ws = new ReconnectingWebSocket("wss://www.blockonomics.co/payment/" + $scope.order.address + "?timestamp=" + $scope.timestamp);
         ws.onmessage = function (evt) {
           ws.close();
 					$interval(function(){
