@@ -19,11 +19,11 @@ You’re officially ready to accept bitcoins on your Joomla site.
 
 ## Screenshots ##
 
-![](screenshots/screenshot-1.png)    
 Payment screen
+![](screenshots/screenshot-1.png)
 
-![](screenshots/screenshot-2.png) 
 Payment Method settings
+![](screenshots/screenshot-2.png) 
 
-![](screenshots/screenshot-3.png)  
-Blockonomics configuration  
+Blockonomics configuration 
+![](screenshots/screenshot-3.png) 
